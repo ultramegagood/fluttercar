@@ -1,3 +1,4 @@
+import 'package:firstproject/AllScreens/loginScreen.dart';
 import 'package:firstproject/AllScreens/mainscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Gachi Taxi',
       theme: ThemeData(
+        fontFamily: "Brand Bolt",
 
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

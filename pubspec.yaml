@@ -80,7 +80,7 @@ flutter:
     - family: Brand-Regular
       fonts:
         - asset: fonts/bolt-regular.ttf
-    - family: Brand Bolt
+    - family: Brand Bold
       fonts:
         - asset: fonts/bolt-semibold.ttf
   #         style: italic
