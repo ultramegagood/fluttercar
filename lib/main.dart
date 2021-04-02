@@ -1,5 +1,6 @@
 import 'package:firstproject/AllScreens/loginScreen.dart';
 import 'package:firstproject/AllScreens/mainscreen.dart';
+import 'package:firstproject/AllScreens/signUpScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: SignUpScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
