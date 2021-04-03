@@ -1,5 +1,9 @@
+import 'package:firstproject/AllScreens/signUpScreen.dart';
 import 'package:flutter/material.dart';
 class LoginScreen extends StatelessWidget {
+  static const String idScreen ="LogIn";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,10 +87,10 @@ class LoginScreen extends StatelessWidget {
 
               FlatButton(
                 onPressed:(){
-                  print("clicked");
+                Navigator.pushNamedAndRemoveUntil(context, SignUpScreen.idScreen, (route) => false);
                 },
                 child: Text(
-                  "invalid account register here",
+                  "Register here",
                 ),
               ),
             ],
