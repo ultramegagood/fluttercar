@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firstproject/AllScreens/mainscreen.dart';
 import 'package:firstproject/AllScreens/signUpScreen.dart';
+import 'package:firstproject/Widgets/ProgressDialog.dart';
+import 'package:firstproject/Widgets/progressDialog.dart';
 import 'package:firstproject/main.dart';
 import 'package:flutter/material.dart';
 class LoginScreen extends StatelessWidget {
@@ -116,6 +118,8 @@ class LoginScreen extends StatelessWidget {
   }
   final FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
   void loginAuthUser(BuildContext context)async{
+
+
     final User firebaseUser= (await _firebaseAuth.signInWithEmailAndPassword(email: emailTextEditingController.text, password: passwordTextEditingController.text).catchError((errorMsg){displayToastMessage("Error: "+errorMsg.toString(), context);})).user;
     if(firebaseUser!=null)
     {
