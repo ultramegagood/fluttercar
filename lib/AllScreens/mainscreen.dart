@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firstproject/Widgets/Divider.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
@@ -19,6 +20,22 @@ class _MainScreenState extends State<MainScreen> {
   Completer<GoogleMapController> _controllerGM = Completer();
   GoogleMapController newGoogleMapController;
   GlobalKey<ScaffoldState> scaffoldKey=new GlobalKey<ScaffoldState>();
+  Position currentPosition;
+  var geoLocator = Geolocator();
+  double bottomPaddingOfMap=0;
+
+  void locatePosition() async
+  {
+    Position position= await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    currentPosition=position;
+    LatLng latLatPosition = LatLng(position.latitude, position.longitude);
+    CameraPosition cameraPosition = new CameraPosition(target: latLatPosition, zoom: 14);
+    newGoogleMapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
+
+
+
+
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
@@ -84,12 +101,22 @@ class _MainScreenState extends State<MainScreen> {
         ),
         body: Stack(
         children: [
-          GoogleMap(mapType: MapType.normal,
+          GoogleMap(
+            padding: EdgeInsets.only(bottom: bottomPaddingOfMap),
+            mapType: MapType.normal,
       myLocationButtonEnabled: true,
       initialCameraPosition: _kGooglePlex,
-      onMapCreated: (GoogleMapController controller){
+      myLocationEnabled: true,
+      zoomGesturesEnabled: true,
+      zoomControlsEnabled: true,
+      onMapCreated: (GoogleMapController controller)
+      {
         _controllerGM.complete(controller);
         newGoogleMapController=controller;
+        setState(() {
+          bottomPaddingOfMap=265.0;
+        });
+        locatePosition();
     },
 
     ),
@@ -132,7 +159,7 @@ class _MainScreenState extends State<MainScreen> {
             right: 0.0,
             bottom: 0.0,
             child: Container(
-              height: 320.0,
+              height: 300.0,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius:BorderRadius.only(topLeft: Radius.circular(15.0),topRight:Radius.circular(15.0)),
